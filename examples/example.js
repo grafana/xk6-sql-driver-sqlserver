@@ -1,14 +1,16 @@
 import sql from "k6/x/sql";
-import driver from "k6/x/sql/driver/ramsql";
+import driver from "k6/x/sql/driver/sqlserver";
 
-const db = sql.open(driver, "test_db");
+// The second argument is a MS SQL connection string, e.g.
+// Server=127.0.0.1;Database=myDB;User Id=myUser;Password=myPassword;
+const db = sql.open(driver, "");
 
 export function setup() {
-  db.exec(`CREATE TABLE IF NOT EXISTS namevalue (
-             id INTEGER PRIMARY KEY AUTOINCREMENT,
-             name VARCHAR NOT NULL,
-             value VARCHAR
-           );`);
+  db.exec(`IF object_id('keyvalues') is null
+            CREATE TABLE keyvalues (
+            [id] INT IDENTITY PRIMARY KEY,
+            [key] varchar(50) NOT NULL,
+            [value] varchar(50));`);
 }
 
 export function teardown() {
@@ -16,10 +18,10 @@ export function teardown() {
 }
 
 export default function () {
-  db.exec("INSERT INTO namevalue (name, value) VALUES('extension-name', 'xk6-foo');");
+  db.exec("INSERT INTO keyvalues ([key], [value]) VALUES('plugin-name', 'k6-plugin-sql');");
 
-  let results = sql.query(db, "SELECT * FROM namevalue WHERE name = $1;", "extension-name");
+  let results = sql.query(db, "SELECT * FROM keyvalues WHERE [key] = @p1;", "plugin-name");
   for (const row of results) {
-    console.log(`name: ${row.name}, value: ${row.value}`);
+    console.log(`key: ${row.key}, value: ${row.value}`);
   }
 }

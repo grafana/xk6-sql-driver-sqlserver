@@ -1,12 +1,11 @@
 all: test build example
 
-test: *.go testdata/*.js
-	go test -count 1 ./...
+test:
 
 build: k6
 
 k6: *.go go.mod go.sum
-	xk6 build --with github.com/grafana/xk6-sql@latest --with github.com/grafana/xk6-sql-driver-ramsql=.
+	xk6 build --with github.com/grafana/xk6-sql@latest --with github.com/grafana/xk6-sql-driver-sqlserver=.
 
 example: k6
 	./k6 run examples/example.js

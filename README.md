@@ -1,21 +1,23 @@
-# xk6-sql-driver-ramsql
+# xk6-sql-driver-sqlserver
 
-Database driver extension for [xk6-sql](https://github.com/grafana/xk6-sql) k6 extension to support RamSQL database.
+Database driver extension for [xk6-sql](https://github.com/grafana/xk6-sql) k6 extension to support Microsoft SQL Server database.
 
 ## Example
 
 ```JavaScript file=examples/example.js
 import sql from "k6/x/sql";
-import driver from "k6/x/sql/driver/ramsql";
+import driver from "k6/x/sql/driver/sqlserver";
 
-const db = sql.open(driver, "test_db");
+// The second argument is a MS SQL connection string, e.g.
+// Server=127.0.0.1;Database=myDB;User Id=myUser;Password=myPassword;
+const db = sql.open(driver, "");
 
 export function setup() {
-  db.exec(`CREATE TABLE IF NOT EXISTS namevalue (
-             id INTEGER PRIMARY KEY AUTOINCREMENT,
-             name VARCHAR NOT NULL,
-             value VARCHAR
-           );`);
+  db.exec(`IF object_id('keyvalues') is null
+            CREATE TABLE keyvalues (
+            [id] INT IDENTITY PRIMARY KEY,
+            [key] varchar(50) NOT NULL,
+            [value] varchar(50));`);
 }
 
 export function teardown() {
@@ -23,11 +25,11 @@ export function teardown() {
 }
 
 export default function () {
-  db.exec("INSERT INTO namevalue (name, value) VALUES('extension-name', 'xk6-foo');");
+  db.exec("INSERT INTO keyvalues ([key], [value]) VALUES('plugin-name', 'k6-plugin-sql');");
 
-  let results = sql.query(db, "SELECT * FROM namevalue WHERE name = $1;", "extension-name");
+  let results = sql.query(db, "SELECT * FROM keyvalues WHERE [key] = @p1;", "plugin-name");
   for (const row of results) {
-    console.log(`name: ${row.name}, value: ${row.value}`);
+    console.log(`key: ${row.key}, value: ${row.value}`);
   }
 }
 ```
@@ -46,9 +48,9 @@ Check the [xk6-sql documentation](https://github.com/grafana/xk6-sql) on how to 
 >
 > After creating the driver repository, remember the following:
 >
-> - replace `RamSQL` with the database name in:
+> - replace `Microsoft SQL Server` with the database name in:
 >   -  `README.md`
-> - replace `ramsql` with the database driver name in:
+> - replace `sqlserver` with the database driver name in:
 >   - `README.md`
 >   - `register.go`
 >   - `register_test.go`
