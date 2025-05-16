@@ -6,7 +6,6 @@ metadata:
   description: |
     xk6-sql driver extension for Microsoft SQL Server database support
   annotations:
-    backstage.io/techdocs-ref: dir:.
     github.com/project-slug: grafana/xk6-sql-driver-sqlserver
 spec:
   type: library
