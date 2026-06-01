@@ -52,8 +52,8 @@ github.com/gorilla/websocket v1.5.3 h1:saDtZ6Pbx/0u+bgYQ3q96pZgCzfhKXGPqt7kZ72aN
 github.com/gorilla/websocket v1.5.3/go.mod h1:YR8l580nyteQvAITg2hZ9XVh4b55+EU/adAjf1fMHhE=
 github.com/grafana/sobek v0.0.0-20260429085637-a66d4790012b h1:mM/qn1luOrRZHT3G+405JMdCx4mGxeLKpOkVBa5+lFw=
 github.com/grafana/sobek v0.0.0-20260429085637-a66d4790012b/go.mod h1:8pB+ag4SAbqtDxh1LNTeUI62/5f8mmEACImwbDHoUC0=
-github.com/grafana/xk6-sql v1.1.0 h1:tKJ6FB40/zFtrZpy2mInGiB2QJuZVzxLxDlxT2K6d+Q=
-github.com/grafana/xk6-sql v1.1.0/go.mod h1:sI/O/HAbK690Yh1gqTrb1FoDWXk86Jy580Bq3X+wqFw=
+github.com/grafana/xk6-sql v1.1.1 h1:sZk3eMCz3tEWhnLIkC37ShyeUdrqZ/mvJDVKzxYxA/0=
+github.com/grafana/xk6-sql v1.1.1/go.mod h1:gHnLJTOG/eBmi5oAXAHHnaHP87u8uAipPxebk9aFvGU=
 github.com/grpc-ecosystem/grpc-gateway/v2 v2.28.0 h1:HWRh5R2+9EifMyIHV7ZV+MIZqgz+PMpZ14Jynv3O2Zs=
 github.com/grpc-ecosystem/grpc-gateway/v2 v2.28.0/go.mod h1:JfhWUomR1baixubs02l85lZYYOm7LV6om4ceouMv45c=
 github.com/josharian/intern v1.0.0 h1:vlS4z54oSdjm0bgjRigI+G1HpF+tI+9rE5LLzOg8HmY=
