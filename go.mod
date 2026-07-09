@@ -1,8 +1,6 @@
 module github.com/grafana/xk6-sql-driver-sqlserver
 
-go 1.25.7
-
-toolchain go1.25.11
+go 1.25.12
 
 require (
 	github.com/grafana/xk6-sql v1.2.0
