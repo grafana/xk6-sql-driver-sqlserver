@@ -6,7 +6,7 @@ toolchain go1.26.8
 
 require (
 	github.com/grafana/xk6-sql v1.2.2
-	github.com/microsoft/go-mssqldb v1.11.0
+	github.com/microsoft/go-mssqldb v1.11.2
 )
 
 require (
